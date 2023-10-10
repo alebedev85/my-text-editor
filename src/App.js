@@ -1,23 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic"
+import { CKEditor } from "@ckeditor/ckeditor5-react"
+import React, { useState } from "react"
 
 function App() {
+  const [text, setText] = useState("")
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="editor">
+        <CKEditor
+          editor={ClassicEditor}
+          data={text}
+          onChange={(event, editor) => {
+            const data = editor.getData()
+            setText(data)
+          }}
+        />
+      </div>
     </div>
   );
 }
